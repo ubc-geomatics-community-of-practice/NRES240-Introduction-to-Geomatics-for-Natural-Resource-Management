@@ -1,9 +1,14 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
 ```{r echo=FALSE}
 yml_content <- yaml::read_yaml("chapterauthors.yml")
 author <- yml_content[["lab3shortname"]][["author"]]
 ```
 
-# Spatial Overlay in QGIS {#ClimateNA}
+# Spatial Overlay in QGIS {#Overlay}
 
 Written by
 ```{r results='asis', echo=FALSE}
