@@ -59,7 +59,7 @@ Use the **Historical** drop-down menu to generate climate normals from different
 
 The Quick Tutorial button will give more explanation for other features of the webmap. 
 
-##### Q2a. Zoom in to the UBC Vancouver campus, what is the MAT and MAP at this location for the normal period 1961_1990? (You do not need to click on the exact same point shown below, but make sure to click somewhere on campus). {.unnumbered}
+##### Q2. Zoom in to the UBC Vancouver campus, what is the MAT and MAP at this location for the normal period 1961_1990? (You do not need to click on the exact same point shown below, but make sure to click somewhere on campus). {.unnumbered}
 
 ``` {r, echo=FALSE, fig.align = 'center'}
 knitr::include_graphics('images/01/01-UBC.jpg')
