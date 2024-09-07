@@ -201,7 +201,7 @@ Hana Travers-Smith</p>
 <h2>Task 1: Import Data<a href="Overlay.html#task-1-import-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This lab introduces a new <strong>open-source</strong> software called <strong>QGIS</strong>. It has similar tools and operations as ArcGIS Pro, (which you used in the first two labs), but it is freely available to the public and does not require a paid subscription like ArcGIS Pro. Many consulting and NGO’s prefer QGIS for this reason, so it is helpful to be familiar with how to use it!</p>
 <p><strong>Step 1:</strong> Open QGIS and select “New Empty Project”. To add data to the map use the <strong>Browser</strong> pane on the left to navigate to the directory on your computer where the lab data is saved. Your “Downloads” and “Documents” folders will be listed under the <strong>Home</strong> directory in the Browser. Double click on a layer to add it to the map.</p>
-<p>Load the <strong>Herds.shp</strong> and the <strong>Herd_area_forest.csv</strong> datasets. Note that the Herd_area_forest dataset is not a spatial data set (it is just a table of attributes) - so it will not add spatial data on the map.</p>
+<p>Load the <strong>Herds.fgb</strong> and the <strong>Herd_area_forest.csv</strong> datasets. The “flatgeobuf” or <code>fgb</code> is a new spatial data file type, it is equivalent to a shapefile that we worked with in ArcGIS, but it is open-access and is not “owned” by ESRI (the company the makes ArcGIS). Also note that the Herd_area_forest dataset is not a spatial data set (it is just a table of attributes) - so it will not add spatial data on the map.</p>
 <p><img src="images/03/03-qgis.png" width="100%" /></p>
 <p>If you ever accidentally close the Browser or Layers panels you can reopen them from View &gt; Panels &gt; and toggling on the visible panels!</p>
 <p><strong>Step 2:</strong> Add a basemap by scrolling through the Browser panel and double clicking on <strong>Open Street Map</strong>. You may get a pop-up window asking which geographic transformation you want to apply to the basemap. Click the first one on the list &gt; Okay.
@@ -289,7 +289,7 @@ In the Layers panel you can change the order the layers plot in by dragging and 
 <div id="task-4-data-analysis" class="section level2 unnumbered hasAnchor">
 <h2>Task 4: Data Analysis<a href="Overlay.html#task-4-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this task we will combine the herd polygons with spatial information of wildfire boundaries to understand which herds have experienced the most disturbance from wildfire.</p>
-<p><strong>Step 1:</strong> Load the wild fires polygon shapefile from <strong>Lab 2</strong> (fire_polys) and plot it on top of the caribou herds.</p>
+<p><strong>Step 1:</strong> Load the wild fires polygon shapefile from <strong>Lab 2</strong> (H_FIRE_PLY) and plot it on top of the caribou herds.</p>
 <p><img src="images/03/03-fires.png" width="80%" /></p>
 <p><strong>Step 2:</strong> We will use the <strong>Intersection</strong> tool to extract the overlapping area between the caribou herd boundaries and wildfire extents. The resulting layer will have attributes from both input layers.</p>
 <p><img src="images/03/03-intersect.png" width="80%" />
@@ -297,10 +297,12 @@ In the Layers panel you can change the order the layers plot in by dragging and 
 <p>Search for the <strong>Intersection</strong> tool, Processing &gt; Processing Toolbox.</p>
 <ul>
 <li>Input Layer: Herds</li>
-<li>Overlay Layer: fire_polys</li>
+<li>Overlay Layer: H_FIRE_PLY</li>
 <li>Leave defaults for all other options</li>
 <li>Hit Run. This operation may take several minutes.</li>
 </ul>
+<p><strong>You will encounter the following error message <code>Feature (16748) from “H_FIRE_PLY_polygon” has invalid geometry. Please fix the geometry</code>. To do this, navigate to the “Fix Geometries” tool in the Processing Toolbox and use the “H_FIRE_PLY” layer as the input.</strong></p>
+<p>Now try re-running the Intersection tool using the resulting “Fixed geometries” layer.</p>
 <p>At the end you should have a new layer called “Intersection”. Turn off all other layers and inspect the output and its attribute table. Each polygon represents the area within the the caribou herds that <strong>also</strong> experienced fire.</p>
 <p><strong>Notice that there are some attributes with duplicate names in both datasets (for example AREA_SQM and AREA_SQM2). The attributes from the caribou herds will be listed first and the attributes from the fire polygons will be listed second!</strong></p>
 <p><strong>Step 3:</strong> Next we will calculate the area in km2 of each of the intersected polygons. Open the attribute table of the <strong>Intersection layer</strong> we just created.</p>
@@ -328,14 +330,14 @@ In the Layers panel you can change the order the layers plot in by dragging and 
 <h4>Q11: What is the total burned area in the Northern herd ecotype?<a href="Overlay.html#q11-what-is-the-total-burned-area-in-the-northern-herd-ecotype" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>Step 6:</strong> Use what you have learned about SQL statements and summary statistics to answer the following questions:</p>
 </div>
-<div id="q12-what-is-the-total-area-of-endangered-caribou-habitat-in-km-squared" class="section level4 unnumbered hasAnchor">
-<h4>Q12: What is the total area of Endangered caribou habitat in km squared?<a href="Overlay.html#q12-what-is-the-total-area-of-endangered-caribou-habitat-in-km-squared" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="q12-what-is-the-total-area-of-endangered-caribou-habitat-in-km-squared-total-habitat-not-burned-area" class="section level4 unnumbered hasAnchor">
+<h4>Q12: What is the total area of Endangered caribou habitat in km squared? (Total HABITAT not burned area!)<a href="Overlay.html#q12-what-is-the-total-area-of-endangered-caribou-habitat-in-km-squared-total-habitat-not-burned-area" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 </div>
 <div id="q13-what-is-the-total-burned-area-of-endangered-caribou-habitat-in-km-squared" class="section level4 unnumbered hasAnchor">
 <h4>Q13: What is the total burned area of Endangered caribou habitat in km squared?<a href="Overlay.html#q13-what-is-the-total-burned-area-of-endangered-caribou-habitat-in-km-squared" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 </div>
-<div id="q14-what-proportion-of-endangered-caribou-habitat-was-burned" class="section level4 unnumbered hasAnchor">
-<h4>Q14: What <strong>proportion</strong> of Endangered caribou habitat was burned?<a href="Overlay.html#q14-what-proportion-of-endangered-caribou-habitat-was-burned" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="q14-what-proportion-of-endangered-caribou-habitat-was-burned-answer-to-3-decimal-places." class="section level4 unnumbered hasAnchor">
+<h4>Q14: What <strong>proportion</strong> of Endangered caribou habitat was burned? Answer to 3 decimal places.<a href="Overlay.html#q14-what-proportion-of-endangered-caribou-habitat-was-burned-answer-to-3-decimal-places." class="anchor-section" aria-label="Anchor link to header"></a></h4>
 
 </div>
 </div>
