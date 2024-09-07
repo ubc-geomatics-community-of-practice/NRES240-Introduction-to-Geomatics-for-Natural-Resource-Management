@@ -1,6 +1,6 @@
 --- 
 title: "NRES 241: Introduction to Geomatics for Natural Resource Management"
-author: "Paul D. Pickell"
+author: "Chris Colton"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
