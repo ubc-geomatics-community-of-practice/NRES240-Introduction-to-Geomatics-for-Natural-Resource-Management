@@ -38,7 +38,7 @@ This lab introduces a new **open-source** software called **QGIS**. It has simil
 
 **Step 1:** Open QGIS and select "New Empty Project". To add data to the map use the **Browser** pane on the left to navigate to the directory on your computer where the lab data is saved. Your "Downloads" and "Documents" folders will be listed under the **Home** directory in the Browser. Double click on a layer to add it to the map. 
 
-Load the **Herds.shp** and the **Herd_area_forest.csv** datasets. Note that the Herd_area_forest dataset is not a spatial data set (it is just a table of attributes) - so it will not add spatial data on the map. 
+Load the **Herds.fgb** and the **Herd_area_forest.csv** datasets. The "flatgeobuf" or ```fgb``` is a new spatial data file type, it is equivalent to a shapefile that we worked with in ArcGIS, but it is open-access and is not "owned" by ESRI (the company the makes ArcGIS). Also note that the Herd_area_forest dataset is not a spatial data set (it is just a table of attributes) - so it will not add spatial data on the map. 
 
 ```{r 03-qgis, out.width= "100%", echo = FALSE}
     knitr::include_graphics("images/03/03-qgis.png")
@@ -182,7 +182,7 @@ Clear the selected attributes.
 
 In this task we will combine the herd polygons with spatial information of wildfire boundaries to understand which herds have experienced the most disturbance from wildfire. 
 
-**Step 1:** Load the wild fires polygon shapefile from **Lab 2** (fire_polys) and plot it on top of the caribou herds. 
+**Step 1:** Load the wild fires polygon shapefile from **Lab 2** (H_FIRE_PLY) and plot it on top of the caribou herds. 
 
 ```{r 03-fires, out.width= "80%", echo = FALSE}
     knitr::include_graphics("images/03/03-fires.png")
@@ -198,9 +198,13 @@ https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/vectoroverla
 Search for the **Intersection** tool, Processing > Processing Toolbox. 
 
 - Input Layer: Herds
-- Overlay Layer: fire_polys
+- Overlay Layer: H_FIRE_PLY
 - Leave defaults for all other options
 - Hit Run. This operation may take several minutes. 
+
+**You will encounter the following error message ```Feature (16748) from “H_FIRE_PLY_polygon” has invalid geometry. Please fix the geometry```. To do this, navigate to the "Fix Geometries" tool in the Processing Toolbox and use the "H_FIRE_PLY" layer as the input.**
+
+Now try re-running the Intersection tool using the resulting "Fixed geometries" layer. 
 
 At the end you should have a new layer called "Intersection". Turn off all other layers and inspect the output and its attribute table. Each polygon represents the area within the the caribou herds that **also** experienced fire. 
 
@@ -245,8 +249,8 @@ Change the input layer to "Intersection" and the attribute to "intersect_area_km
 
 **Step 6:** Use what you have learned about SQL statements and summary statistics to answer the following questions:
 
-#### Q12: What is the total area of Endangered caribou habitat in km squared? {.unnumbered}
+#### Q12: What is the total area of Endangered caribou habitat in km squared? (Total HABITAT not burned area!) {.unnumbered}
 
 #### Q13: What is the total burned area of Endangered caribou habitat in km squared? {.unnumbered}
 
-#### Q14: What **proportion** of Endangered caribou habitat was burned? {.unnumbered}
+#### Q14: What **proportion** of Endangered caribou habitat was burned? Answer to 3 decimal places. {.unnumbered}
