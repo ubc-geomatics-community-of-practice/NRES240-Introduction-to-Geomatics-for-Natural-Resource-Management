@@ -43,7 +43,7 @@ In this task, we will review what a geodatabase contains and learn how to design
 
 **Step 2:** Download the zipped (.zip) lab data from GitHub, unzip it, and move it into your Lab2 project folder, which by default is `C:\Users\YourUsername\Documents\ArcGIS\Projects\Lab2.`
 
-**Step 3:** Open the Catalog pane by clicking View > Catalog Pane. Under the folders tab you should see the folder with your lab 2 project. You have six shapefiles in the data folder. Three different kinds of icons are shown in front of shapefile names. These indicate what type of data (point, line, or polygon) is stored within a shapefile. For example, the **DBM_POP_PN_points** shapefile is composed of points, the **HWY_PRFLS_line** shapefile is composed of lines, and the **main_BC_Boundary_terrestrial_multipart** shapefile is a polygon.
+**Step 3:** Open the Catalog pane by clicking View > Catalog Pane. Under the folders tab you should see the folder with your lab 2 project. You have five shapefiles in the data folder. Three different kinds of icons are shown in front of shapefile names. These indicate what type of data (point, line, or polygon) is stored within a shapefile. For example, the **DBM_POP_PN_points** shapefile is composed of points, the **HWY_PRFLS_line** shapefile is composed of lines, and the **main_BC_Boundary_terrestrial_multipart** shapefile is a polygon.
 
 ```{r 02-data, out.width= "40%", echo = FALSE}
     knitr::include_graphics("images/02/02-data.png")
@@ -97,13 +97,9 @@ First, you will notice that the Canada_cities layer contains cities across all o
 
 **Step 2:** Next, we will create a new shapefile of fires that occurred after 2010. Right-click on the "Historical_fires" layer in the Contents pane, select "Data" and then select "Export Features".
 
-The first two lines in the opened dialog box are already filled in automatically. Name the exported file as "Historical_fires_2010". Then, select "FIRE_YEAR" in the drop-down list below, then select "is greater than or equal to", and select "2010". Click "OK".
+The first two lines in the opened dialog box are already filled in automatically. Name the exported file as "Historical_fires_2010". Then, open the filter drop down, and select "FIRE_YEAR" from the list of fields below, then select "is greater than or equal to", and select "2010". Click "OK".
 
 A new point feature class appears in your geodatabase, which you may need to refresh to see. It is also automatically added to the contents pane, and you can right-click on it and select the attribute table to view the new data in detail.
-
-```{r 02-export, out.width= "40%", echo = FALSE}
-    knitr::include_graphics("images/02/02-export.png")
-```
 
 Open the attribute table of the new 2010 fires layer. You can generate simple summary statistics for each attribute by right-clicking on a column > Statistics. You can also order attributes from largest to smallest by right clicking on a column > Sort Descending (Sort ascending sorts smallest to largest). Use these tools to answer the following questions. 
 
@@ -121,7 +117,7 @@ This will create a new attribute table at the bottom of the Contents Pane, that 
 
 **Step 3:** Open the attribute table of the BC_fire_districts layer. The MFFRCNTRNM  attribute (very helpfully named), contains the name of each administrative fire centre. In the next step, we will spatially join this information to the BC_Cities layer, so that each city has an attribute showing which fire district it is in. 
 
-Right click on the BC_Cities layer > Joins and Relates > Spatial Join. Set the fire districts layer as the **Join Features** and name the new feature class BC_cities_join. Set **Join Operation** to Join one to one. This will join one city to one fire district. Scroll through the **Match Options**. These determine how the target features are matched to the join features. Select **Within**, this will join cities with the fire district they are completely within. Click OK. 
+Click on the analysis button on the ribbon near the top of the screen, then click tools to open up the geoprocessing pane. In the search bar, look for and open the **Spatial Join** tool. Set the fire districts layer as the **Join Features** and name the new feature class BC_cities_join. Set **Join Operation** to Join one to one. This will join one city to one fire district. Scroll through the **Match Options**. These determine how the target features are matched to the join features. Select **Within**, this will join cities with the fire district they are completely within. Click OK. 
 
 ##### Q7: What fire centre and fire zone is the town of Merrit located in? {.unnumbered}
 
